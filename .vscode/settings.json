@@ -1,0 +1,4 @@
+{
+    "dotnet.defaultSolution": "Nano Runner.sln",
+    "FSharp.suggestGitignore": false
+}
