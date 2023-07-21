@@ -10,7 +10,6 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float gravity;
     private float jumpVelocity;
-    private Vector2 startTouchPosition, endTouchPosition;
 
     private void Update() {
         Vector3 direction = transform.forward * speed;
@@ -27,5 +26,20 @@ public class Movement : MonoBehaviour
 
     private void Start(){
         controller = GetComponent<CharacterController>();
+    }
+
+    public void SwipeMove(Vector2 direction){
+        if (direction.x > 0){
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+        }
+        if (direction.x < 0){
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        if (direction.y > 0){
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        }
+        if (direction.y < 0){
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        }
     }
 }
