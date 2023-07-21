@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NewBehaviourScript : MonoBehaviour
+[DefaultExecutionOrder(-1)]
+public class InputManager : Singleton<InputManager>
 {
 
     #region Events
@@ -23,7 +24,7 @@ public class NewBehaviourScript : MonoBehaviour
         playerControls.Enable();
     }
 
-    private void OnDesable(){
+    private void OnDisable(){
         playerControls.Disable();
     }
 
