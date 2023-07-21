@@ -3,9 +3,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private CharacterController controller;
-    public float speed = 5;
-    public float jumpHeight;
-    public float gravity;
+    [SerializeField]
+    private float speed = 5;
+    [SerializeField]
+    private float jumpHeight;
+    [SerializeField]
+    private float gravity;
     private float jumpVelocity;
     private Vector2 startTouchPosition, endTouchPosition;
 
