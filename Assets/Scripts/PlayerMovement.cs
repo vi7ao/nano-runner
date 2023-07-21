@@ -12,39 +12,117 @@ public class Movement : MonoBehaviour
     private float jumpHeight;
     [SerializeField]
     private float gravity;
+    [SerializeField]
+    private float swipeMoveSpeed = 10f;
+    [SerializeField]
+    private float laneDistance = 2f;
     private float jumpVelocity;
 
-    private void Update() {
+    private bool isSwiping = false;
+    private Vector2 startTouchPosition;
+    private Vector2 currentTouchPosition;
+
+    private void Update()
+    {
         if (lives <= 0) alive = false;
         if (!alive) return;
+
         Vector3 direction = transform.forward * speed;
-        if (controller.isGrounded) {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                jumpVelocity = jumpHeight;
-            }
-        } else {
+
+        if (!controller.isGrounded)
+        {
             jumpVelocity -= gravity;
         }
+
         direction.y = jumpVelocity;
         controller.Move(direction * Time.deltaTime);
+
+        if (Input.touchCount > 0)
+        {
+            HandleSwipeGestures();
+        }
     }
 
-    private void Start(){
+    private void Start()
+    {
         controller = GetComponent<CharacterController>();
     }
 
-    public void SwipeMove(Vector2 direction){
-        if (direction.x > 0){
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
+    private void HandleSwipeGestures()
+    {
+        Touch touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Began)
+        {
+            isSwiping = true;
+            startTouchPosition = touch.position;
+            currentTouchPosition = touch.position;
         }
-        if (direction.x < 0){
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        else if (touch.phase == TouchPhase.Moved)
+        {
+            currentTouchPosition = touch.position;
         }
-        if (direction.y > 0){
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        else if (touch.phase == TouchPhase.Ended)
+        {
+            isSwiping = false;
+            DetectSwipeDirection();
         }
-        if (direction.y < 0){
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
+    }
+
+    private void DetectSwipeDirection()
+    {
+        Vector2 swipeDelta = currentTouchPosition - startTouchPosition;
+
+        if (swipeDelta.magnitude < 50f)
+            return;
+
+        if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+        {
+            if (swipeDelta.x > 0)
+            {
+                MoveCharacterRight();
+            }
+            else
+            {
+                MoveCharacterLeft();
+            }
+        }
+        else
+        {
+            if (swipeDelta.y > 0)
+            {
+                Jump();
+            }
+            else
+            {
+                // Swipe down (crouch, if needed)
+            }
+        }
+    }
+
+    private void MoveCharacterLeft()
+    {
+        int targetLane = Mathf.RoundToInt(transform.position.x / laneDistance) - 1;
+        targetLane = Mathf.Clamp(targetLane, -1, 1); // Clamp the target lane to stay between -1 and 1
+        float targetX = targetLane * laneDistance;
+        Vector3 newPosition = new Vector3(targetX, transform.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, newPosition, swipeMoveSpeed * Time.deltaTime);
+    }
+
+    private void MoveCharacterRight()
+    {
+        int targetLane = Mathf.RoundToInt(transform.position.x / laneDistance) + 1;
+        targetLane = Mathf.Clamp(targetLane, -1, 1); // Clamp the target lane to stay between -1 and 1
+        float targetX = targetLane * laneDistance;
+        Vector3 newPosition = new Vector3(targetX, transform.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, newPosition, swipeMoveSpeed * Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        if (controller.isGrounded)
+        {
+            jumpVelocity = jumpHeight;
         }
     }
 }

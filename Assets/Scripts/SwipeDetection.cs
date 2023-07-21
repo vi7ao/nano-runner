@@ -58,10 +58,10 @@ public class SwipeDetection : MonoBehaviour
             Debug.Log("Swipe Down");
         }
         if (Vector2.Dot(Vector2.right, direction) > directionThreshold ){
-            movementScript.SwipeMove(Vector2.right);
+            
         }
         if (Vector2.Dot(Vector2.left, direction) > directionThreshold ){
-            movementScript.SwipeMove(Vector2.left);
+            
         }
     }
 }
