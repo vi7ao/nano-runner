@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    int lives = 3;
+    int score = 0;
+    bool alive = true;
     private CharacterController controller;
     [SerializeField]
     private float speed = 5;
@@ -12,6 +15,8 @@ public class Movement : MonoBehaviour
     private float jumpVelocity;
 
     private void Update() {
+        if (lives <= 0) alive = false;
+        if (!alive) return;
         Vector3 direction = transform.forward * speed;
         if (controller.isGrounded) {
             if (Input.GetKeyDown(KeyCode.Space)) {

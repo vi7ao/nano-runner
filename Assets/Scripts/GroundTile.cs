@@ -7,6 +7,7 @@ public class GroundTile : MonoBehaviour
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        SpawnObstacle();
     }
 
     // Update is called once per frame
@@ -18,5 +19,13 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         groundSpawner.SpawnTile();
         Destroy(gameObject, 3);
+    }
+
+    public GameObject obstaclePrefab;
+
+    void SpawnObstacle(){
+        int obstacleSpawnIndex = Random.Range(2, 5);
+        Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
+        Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
     }
 }
