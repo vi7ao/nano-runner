@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (lives <= 0) alive = false;
         if (!alive) return;
 
         Vector3 direction = transform.forward * speed;
@@ -125,5 +125,16 @@ public class Movement : MonoBehaviour
         {
             jumpVelocity = jumpHeight;
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Player died!");
+        alive = false;
+        Invoke("Restart", 2);
+    }
+
+    void Restart(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

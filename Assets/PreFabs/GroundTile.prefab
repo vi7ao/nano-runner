@@ -230,12 +230,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFirstTile: 1
   obstaclePrefabs:
-  - {fileID: 8494273091092110980, guid: e2a5250b47a63834caae2435b567619f, type: 3}
-  - {fileID: 6350255869209720814, guid: 561c68145df58fb4f98f2c0d2b70ef1b, type: 3}
-  - {fileID: 1250923081550822246, guid: 96b4d3f9eae71dd4ebfd83c8227bb9f3, type: 3}
-  - {fileID: 8745669718409010387, guid: aefc11281ab27eb4f8e5dad8d8eef21b, type: 3}
-  - {fileID: 7622313061684512979, guid: 617ffc5acafd0fa4ba91d6a0bc5c0bf1, type: 3}
-  firstTilePrefab: {fileID: 0}
+  - {fileID: 4835697451309955610, guid: 561c68145df58fb4f98f2c0d2b70ef1b, type: 3}
+  - {fileID: 6152015586555086101, guid: e2a5250b47a63834caae2435b567619f, type: 3}
+  - {fileID: 35306821751143033, guid: 96b4d3f9eae71dd4ebfd83c8227bb9f3, type: 3}
+  - {fileID: 8181953504409868829, guid: aefc11281ab27eb4f8e5dad8d8eef21b, type: 3}
+  - {fileID: 1860314054531001664, guid: 617ffc5acafd0fa4ba91d6a0bc5c0bf1, type: 3}
+  firstTilePrefab: {fileID: 7626183087816306155}
 --- !u!1 &7722854668620543428
 GameObject:
   m_ObjectHideFlags: 0

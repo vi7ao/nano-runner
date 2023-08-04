@@ -5,20 +5,14 @@ public class GroundTile : MonoBehaviour
     GroundSpawner groundSpawner;
     public bool isFirstTile = true;
     public GameObject[] obstaclePrefabs;
-    public GameObject firstTilePrefab;
     // Start is called before the first frame update
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-        if (isFirstTile)
-        {
-            SpawnFirstTile();
-        }
-        else
+        if (!isFirstTile)
         {
             SpawnObstacle();
         }
-        isFirstTile = false;
     }
 
     // Update is called once per frame
@@ -30,10 +24,6 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         groundSpawner.SpawnTile();
         Destroy(gameObject, 3);
-    }
-
-    void SpawnFirstTile(){
-        Instantiate(firstTilePrefab, transform.position, Quaternion.identity, transform);
     }
 
     void SpawnObstacle(){
