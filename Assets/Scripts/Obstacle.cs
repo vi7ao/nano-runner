@@ -10,6 +10,7 @@ public class Obstacle : MonoBehaviour
     void Start()
     {
         playerMovement = GameObject.FindObjectOfType<Movement>();
+
     }
 
     private void OnCollisionEnter(Collision other) {

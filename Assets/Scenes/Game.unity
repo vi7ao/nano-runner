@@ -156,6 +156,12 @@ MonoBehaviour:
   minimumDistance: 0.2
   maximumTime: 1
   directionThreshold: 0.9
+  inputManager: {fileID: 0}
+  startPosition: {x: 0, y: 0}
+  endPosition: {x: 0, y: 0}
+  startTime: 0
+  endTime: 0
+  movementScript: {fileID: 0}
 --- !u!114 &86609521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c988d367d900c4c44ae794310b913f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
 --- !u!4 &86609522
 Transform:
   m_ObjectHideFlags: 0
@@ -387,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpHeight: 15
-  gravity: 1
+  gravity: 50
   swipeMoveSpeed: 100
   laneDistance: 2.5
 --- !u!4 &878901469

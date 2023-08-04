@@ -30,8 +30,9 @@ public class Movement : MonoBehaviour
         Vector3 direction = transform.forward * speed;
 
         if (!controller.isGrounded)
-        {
-            jumpVelocity -= gravity;
+        {   
+            direction = transform.forward * (speed - 2);
+            jumpVelocity -= gravity * Time.deltaTime;
         }
 
         direction.y = jumpVelocity;
