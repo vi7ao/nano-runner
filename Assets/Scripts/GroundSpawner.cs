@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class GroundSpawner : MonoBehaviour
 {
-    public GameObject groundTile;
-   Vector3 nextSpawnPoint;
+    [SerializeField]
+    private GameObject groundTile;
+    Vector3 nextSpawnPoint;
     private void Start()
     {
         for (int i = 0; i < 10; i++){

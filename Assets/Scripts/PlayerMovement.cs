@@ -3,12 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
-    int lives = 3;
-    int score = 0;
-    bool alive = true;
+    private bool alive = true;
     private CharacterController controller;
     [SerializeField]
-    private float speed = 5;
+    public float speed = 5;
     [SerializeField]
     private float jumpHeight;
     [SerializeField]
@@ -18,10 +16,10 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float laneDistance = 2f;
     private float jumpVelocity;
-
     private bool isSwiping = false;
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
+    public float speedMultiplier = 0.1f;
 
     private void Update()
     {

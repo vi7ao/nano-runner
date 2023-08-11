@@ -4,21 +4,19 @@ public class GroundTile : MonoBehaviour
 {
     GroundSpawner groundSpawner;
     public bool isFirstTile = true;
-    public GameObject[] obstaclePrefabs;
-    // Start is called before the first frame update
+    [SerializeField]
+    private GameObject[] obstaclePrefabs;
+    [SerializeField]
+    private GameObject coin;
+
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         if (!isFirstTile)
         {
             SpawnObstacle();
+            SpawnCoins();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerExit(Collider other) {
@@ -41,5 +39,11 @@ public class GroundTile : MonoBehaviour
         }
         Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
         Instantiate(selectedObject, spawnPoint.position, Quaternion.identity, transform);
+    }
+
+    void SpawnCoins(){
+        int coinSpawnIndex = Random.Range(7, 10); // spawnar as moedas no meio (pelo eixo Z) do tile (index 7, 8 e 9 do ground tile)
+        Transform spawnPoint = transform.GetChild(coinSpawnIndex).transform;
+        Instantiate(coin, spawnPoint.position, Quaternion.identity, transform);
     }
 }
